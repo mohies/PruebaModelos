@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página de Ejemplo</title>
+</head>
+<body>
+    <header>
+        <h1>Bienvenido a mi página de ejemplo</h1>
+    </header>
+
+    
+        <article>
+            <time>Nombre:{{libro_mostrar.nombre}}</time>
+            <h2><a href="">{{libro_mostrar.biblioteca.nombre}}</a></h2>
+            <p>Autores</p>
+        </article>
+    
+
+   <ul>
+    {% for autor in libro_mostrar.autores.all %}
+    <li>{{autor.nombre}}</li>
+    {% endfor %}
+   </ul>
+
+    <main>
+        
+        <p>Idioma : {{libro_mostrar.get_tipo_display}}</p>
+   
+   
+        <p>Descripcion {{libro_mostrar.descripcion}}</p>
+        <p>Fecha publicacion {{libro_mostrar.fecha_publicacion}}
+            <a href="{% url 'dame_libros_fecha' libro_mostrar.fecha_publicacion.year libro_mostrar.fecha_publicacion.month %}">
+                Pulsa para ver mas libros del mismo año y mes
+            </a>
+        </p>
+    </main>
+
+</body>
+</html>
+
+
