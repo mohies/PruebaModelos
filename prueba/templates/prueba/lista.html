@@ -35,8 +35,15 @@
     <a href="{% url 'dame_libro' libro.id %}">Pulsa para ver mas detalles del libro</a>
     <a href="{% url 'dame_libros_idioma' libro.tipo %}">
         Pulsa para ver libros del mismo idioma o Español</a>
+        <h3>
+            Ultimo cliente que se llevo el libro
+            <a href="{% url 'ultimo_cliente_libro' libro.id %}">
+            PULSA PARA VERLO
+            </a>
     {% endfor %}
 
+
+  
 </body>
 </html>
 

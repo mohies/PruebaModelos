@@ -28,3 +28,10 @@ def dame_libros_biblioteca(request,id_biblioteca,texto_libro):
     libros=Libro.objects.select_related("Biblioteca").prefetch_related("autores")
     libros=libros.filter(Biblioteca=id_biblioteca).filter(descripcion__contains=texto_libro).order_by("-nombre")
     return render(request,'prueba/lista.html',{"libros_mostrar":libros})  
+def dame_ultimo_cliente_libro(request,libro):
+    cliente=Cliente.objects.filter(prestamos__libro=libro).order_by("-prestamos__fecha_prestamo")[:1].get()
+    return render(request,'prueba/cliente.html',{"cliente":cliente})   #esto es para acceder a las talas intermedias
+def libros_no_prestados(request):
+    libros=Libro.objects.select_related("Biblioteca").prefetch_related("autores")
+    libros=libros.filter(prestamos=None)
+    return render(request,'prueba/lista.html',{"libros_mostrar":libros})  
