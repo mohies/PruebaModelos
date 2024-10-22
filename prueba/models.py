@@ -27,7 +27,7 @@ class Libro(models.Model):
     )
     descripcion=models.TextField()
     fecha_publicacion=models.DateField()
-    Biblioteca=models.ForeignKey(Biblioteca,on_delete=models.CASCADE)
+    Biblioteca=models.ForeignKey(Biblioteca,on_delete=models.CASCADE,related_name="libros_biblioteca")
     autores =   models.ManyToManyField(Autor)
     
 class Cliente(models.Model):

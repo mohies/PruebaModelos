@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import *
 from django.db.models import Q
+from django.db.models import Avg,Max,Min
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
@@ -35,3 +36,9 @@ def libros_no_prestados(request):
     libros=Libro.objects.select_related("Biblioteca").prefetch_related("autores")
     libros=libros.filter(prestamos=None)
     return render(request,'prueba/lista.html',{"libros_mostrar":libros})  
+def dame_agrupaciones_puntos_cliente(request):
+    resultado = Cliente.objects.aggregate(Avg("puntos"), Max("puntos"), Min("puntos"))
+    media=resultado["puntos__avg"]
+    maximo=resultado["puntos__max"]
+    minimo=resultado["puntos__min"]
+    return render(request,'prueba/agrupaciones.html',{"media":media,"maximo":maximo,"minimo":minimo})

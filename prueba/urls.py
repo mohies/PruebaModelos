@@ -10,6 +10,7 @@ urlpatterns = [
     path("prueba/<int:id_biblioteca>/libro/<str:texto_libro>",views.dame_libros_biblioteca,name="dame_libros_biblioteca"),
     path("ultimo-cliente-libro/<int:libro>",views.dame_ultimo_cliente_libro,name="ultimo_cliente_libro"),
     re_path(r"^filtro[0-9]$",views.libros_no_prestados,name="libros_no_prestados"),
+    path('dame-agrupaciones-puntos-clientes',views.dame_agrupaciones_puntos_cliente,name="dame_agrupaciones_puntos_cliente"),
     
     
 
