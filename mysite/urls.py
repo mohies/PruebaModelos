@@ -21,3 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('prueba.urls')),
 ]
+
+handler404="prueba.views.mi_error_404"

@@ -1,6 +1,7 @@
 from django.urls import path, re_path
 from .import views
 
+
 urlpatterns = [
     path('',views.index,name='index'),
     path('prueba/lista',views.listar_libros,name='lista_libros'),
@@ -11,8 +12,9 @@ urlpatterns = [
     path("ultimo-cliente-libro/<int:libro>",views.dame_ultimo_cliente_libro,name="ultimo_cliente_libro"),
     re_path(r"^filtro[0-9]$",views.libros_no_prestados,name="libros_no_prestados"),
     path('dame-agrupaciones-puntos-clientes',views.dame_agrupaciones_puntos_cliente,name="dame_agrupaciones_puntos_cliente"),
-    
-    
-
+    path('prueba/<int:id_biblioteca>/', views.dame_biblioteca, name='dame_biblioteca'),  
 ]
+
+
+
 

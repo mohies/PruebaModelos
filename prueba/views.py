@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from .models import *
-from django.db.models import Q
+from django.db.models import Q,Prefetch
 from django.db.models import Avg,Max,Min
+from django.views.defaults import page_not_found
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    bibliotecas = Biblioteca.objects.all()  # Obtiene todas las bibliotecas
+    return render(request, 'index.html', {'bibliotecas': bibliotecas})
 
 def listar_libros(request):
     libros=Libro.objects.select_related("Biblioteca").prefetch_related("autores")
@@ -42,3 +44,10 @@ def dame_agrupaciones_puntos_cliente(request):
     maximo=resultado["puntos__max"]
     minimo=resultado["puntos__min"]
     return render(request,'prueba/agrupaciones.html',{"media":media,"maximo":maximo,"minimo":minimo})
+def dame_biblioteca(request,id_biblioteca):
+    biblioteca=Biblioteca.objects.prefetch_related(Prefetch("libros_biblioteca")).get(id=id_biblioteca)
+    return render(request,'prueba/biblioteca.html',{"biblioteca":biblioteca})
+
+#errores
+def mi_error_404(request, exception=None):
+    return render(request, 'prueba/errores/404.html', None,None,404)
